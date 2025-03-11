@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
@@ -36,7 +37,7 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable long id, @RequestBody UserDTO userDTO) {
         UserDTO updatedUser = this.userService.updateUser(id, userDTO);
         return ResponseEntity.ok(updatedUser);
