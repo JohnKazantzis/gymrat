@@ -17,11 +17,11 @@ public class UserService {
     }
 
     private UserDTO mapToDTO(User user) {
-        return new UserDTO(user.getId(), user.getName(), user.getEmail());
+        return new UserDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 
     private User mapToEntity(UserDTO userDTO, User currentUserData) {
-        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), currentUserData.getPassword());
+        return new User(userDTO.getName(), userDTO.getEmail(), currentUserData.getPassword());
     }
 
     public List<UserDTO> getAllUsers() {
@@ -30,6 +30,7 @@ public class UserService {
 
     public UserDTO getUserById(long id) {
         User user = this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+        System.out.println("User retrieved: " + user);
         return mapToDTO(user);
     }
 

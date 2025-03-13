@@ -12,7 +12,7 @@ CREATE TABLE exercises (
 
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
@@ -38,4 +38,17 @@ CREATE TABLE workout_sets (
     weight INT NOT NULL,
     workout_exercise_id BIGINT NOT NULL,
     FOREIGN KEY (workout_exercise_id) REFERENCES workout_exercises(id) ON DELETE CASCADE
+);
+
+CREATE TABLE roles(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name ENUM('USER', 'ADMIN') NOT NULL
+);
+
+CREATE TABLE user_roles(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
