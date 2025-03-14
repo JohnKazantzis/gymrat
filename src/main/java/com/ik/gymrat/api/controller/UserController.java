@@ -31,11 +31,6 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
-        UserDTO userDTO = this.userService.createUser(user);
-        return ResponseEntity.ok(userDTO);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable long id, @RequestBody UserDTO userDTO) {
