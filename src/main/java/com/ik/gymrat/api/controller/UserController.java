@@ -5,12 +5,13 @@ import com.ik.gymrat.exceptions.UserNotFoundException;
 import com.ik.gymrat.persistence.entity.User;
 import com.ik.gymrat.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
@@ -39,6 +40,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable long id) {
         this.userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
@@ -53,7 +55,6 @@ public class UserController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Void> handleGenericException(Exception e) {
-        System.out.println("An error occured: " + e.getMessage());
         return ResponseEntity.internalServerError().build();
     }
 }

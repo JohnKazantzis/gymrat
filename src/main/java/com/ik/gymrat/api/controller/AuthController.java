@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.ik.gymrat.exceptions.UserExistsException;
 import com.ik.gymrat.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.authentication.BadCredentialsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -92,6 +93,12 @@ public class AuthController {
     @ExceptionHandler(UserExistsException.class)
     public ResponseEntity<String> handUserExistsException(UserExistsException e) {
         System.out.println("User already exists");
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException e) {
+        System.out.println("Bad credentials");
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

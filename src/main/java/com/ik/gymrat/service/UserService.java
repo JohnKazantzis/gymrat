@@ -39,7 +39,7 @@ public class UserService {
     }
 
     private User mapToEntity(UserDTO userDTO, User currentUserData) {
-        return new User(userDTO.getName(), userDTO.getEmail(), currentUserData.getPassword());
+        return new User(userDTO.getUsername(), userDTO.getEmail(), currentUserData.getPassword());
     }
 
     public List<UserDTO> getAllUsers() {
@@ -48,7 +48,6 @@ public class UserService {
 
     public UserDTO getUserById(long id) {
         User user = this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
-        System.out.println("User retrieved: " + user);
         return mapToDTO(user);
     }
 
