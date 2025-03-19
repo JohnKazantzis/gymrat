@@ -6,20 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "exercises")
-public class Exercise {
-
+@Table(name = "workouts")
+public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "date_of_workout")
+    private String workoutDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "muscle_group_id")
-    private MuscleGroup muscleGroup;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @OneToMany(mappedBy = "exercise")
+    @OneToMany(mappedBy = "workout")
     private List<WorkoutExercise> workoutExercises = new ArrayList<WorkoutExercise>();
 }
