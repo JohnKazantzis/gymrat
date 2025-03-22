@@ -3,7 +3,7 @@ package com.ik.gymrat.api.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.ik.gymrat.exceptions.UserExistsException;
+import com.ik.gymrat.exceptions.UserNotFoundException;
 import com.ik.gymrat.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -90,8 +90,8 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @ExceptionHandler(UserExistsException.class)
-    public ResponseEntity<String> handUserExistsException(UserExistsException e) {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handUserExistsException(UserNotFoundException e) {
         System.out.println("User already exists");
         return ResponseEntity.badRequest().body(e.getMessage());
     }

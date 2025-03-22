@@ -1,20 +1,16 @@
 package com.ik.gymrat.service;
 
-import com.ik.gymrat.api.dto.MessageResponse;
 import com.ik.gymrat.api.dto.SignupRequest;
 import com.ik.gymrat.api.dto.UserDTO;
-import com.ik.gymrat.exceptions.UserExistsException;
 import com.ik.gymrat.exceptions.UserNotFoundException;
 import com.ik.gymrat.persistence.entity.ERole;
 import com.ik.gymrat.persistence.entity.Role;
 import com.ik.gymrat.persistence.entity.User;
 import com.ik.gymrat.persistence.repository.RoleRepository;
 import com.ik.gymrat.persistence.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,11 +50,11 @@ public class UserService {
     public void createUser(SignupRequest request) {
         // Check that the user is not duplicate based on username or email
         if(userRepository.existsByUsername(request.getUsername())) {
-            throw new UserExistsException("Error: Username is already in use!");
+            throw new UserNotFoundException("Error: Username is already in use!");
         }
 
         if(userRepository.existsByEmail(request.getEmail())) {
-            throw new UserExistsException("Error: Email is already in use!");
+            throw new UserNotFoundException("Error: Email is already in use!");
         }
 
         // Create new user
