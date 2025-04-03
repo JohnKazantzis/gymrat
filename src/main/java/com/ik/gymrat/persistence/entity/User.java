@@ -1,7 +1,6 @@
 package com.ik.gymrat.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +29,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
         name = "user_roles",

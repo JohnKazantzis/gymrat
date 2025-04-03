@@ -1,5 +1,6 @@
 package com.ik.gymrat.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,12 @@ public class Exercise {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "muscle_group_id")
     private MuscleGroup muscleGroup;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "exercise")
     private List<WorkoutExercise> workoutExercises = new ArrayList<WorkoutExercise>();
 }

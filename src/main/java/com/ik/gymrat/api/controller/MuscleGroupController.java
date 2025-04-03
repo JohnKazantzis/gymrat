@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/musclegroups")
 public class MuscleGroupController {
@@ -27,22 +28,6 @@ public class MuscleGroupController {
     @GetMapping("/{id}")
     public ResponseEntity<MuscleGroup> getMuscleGroupById(@PathVariable long id) {
         return ResponseEntity.ok(this.muscleGroupService.getMuscleGroupById(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<MuscleGroup> createMuscleGroup(@RequestBody MuscleGroup muscleGroup) {
-        return ResponseEntity.ok(this.muscleGroupService.createMuscleGroup(muscleGroup));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<MuscleGroup> updateMuscleGroup(@PathVariable long id, @RequestBody MuscleGroup muscleGroup) {
-        return ResponseEntity.ok(this.muscleGroupService.updateMuscleGroup(id, muscleGroup));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMuscleGroupById(@PathVariable long id) {
-        this.muscleGroupService.deleteMuscleGroupById(id);
-        return ResponseEntity.noContent().build();
     }
 
     @ExceptionHandler(MuscleGroupNotFoundException.class)

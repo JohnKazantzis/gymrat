@@ -25,22 +25,4 @@ public class MuscleGroupService {
             () -> new MuscleGroupNotFoundException("Muscle group with id: " + id + " not found")
         );
     }
-
-    public MuscleGroup createMuscleGroup(MuscleGroup muscleGroup) {
-        return this.muscleGroupRepository.save(muscleGroup);
-    }
-
-    public MuscleGroup updateMuscleGroup(long id, MuscleGroup muscleGroup) {
-        muscleGroupRepository.findById(id).orElseThrow(
-            () -> new MuscleGroupNotFoundException("Muscle group with id: " + muscleGroup.getId() + " not found")
-        );
-        return this.muscleGroupRepository.save(muscleGroup);
-    }
-
-    public void deleteMuscleGroupById(long id) {
-        this.muscleGroupRepository.findById(id).orElseThrow(
-            () -> new MuscleGroupNotFoundException("Muscle group with id: " + id + " not found")
-        );
-        this.muscleGroupRepository.deleteById(id);
-    }
 }
