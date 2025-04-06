@@ -33,4 +33,8 @@ public class Workout {
 
     @OneToMany(mappedBy = "workout")
     private List<WorkoutExercise> workoutExercises = new ArrayList<WorkoutExercise>();
+
+    public Workout(Long id) {
+        this.id = id;
+    }
 }

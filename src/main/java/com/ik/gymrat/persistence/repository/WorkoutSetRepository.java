@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface WorkoutSetRepository extends JpaRepository<WorkoutSet, Long> {
 
-    public List<WorkoutSet> findByWorkoutExercise(WorkoutExercise workoutExercise);
+    List<WorkoutSet> findByWorkoutExercise(WorkoutExercise workoutExercise);
 
 }

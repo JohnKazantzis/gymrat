@@ -8,7 +8,6 @@ import com.ik.gymrat.persistence.repository.UserRepository;
 import com.ik.gymrat.persistence.repository.WorkoutRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class WorkoutService {
     public Page<WorkoutResponse> getAllWorkouts(int page, int size, long userId) {
         User user = this.userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
         Page<Workout> workouts = this.workoutRepository.findAllByUser(user, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "workoutDate")));
-        return workouts.map(workout -> new WorkoutResponse(workout.getId(), workout.getWorkoutDate()));
+        return workouts.map(workout -> new WorkoutResponse(workout));
     }
 
 }

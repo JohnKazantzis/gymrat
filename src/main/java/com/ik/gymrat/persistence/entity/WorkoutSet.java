@@ -18,6 +18,9 @@ public class WorkoutSet {
     @Column(name = "set_number")
     private int setNumber;
 
+    @Column(name = "reps")
+    private int reps;
+
     @Column(name = "weight")
     private float weight;
 

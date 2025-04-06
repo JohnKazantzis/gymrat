@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
-    public Page<Workout> findAllByUser(User user, Pageable pageable);
+    Page<Workout> findAllByUser(User user, Pageable pageable);
 
 }
