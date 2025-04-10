@@ -1,5 +1,6 @@
 package com.ik.gymrat.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,4 +27,8 @@ public class MuscleGroup {
 
     @OneToMany(mappedBy = "muscleGroup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exercise> exercises = new ArrayList<Exercise>();
+
+    public MuscleGroup(long id) {
+        this.id = id;
+    }
 }

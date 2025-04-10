@@ -1,11 +1,14 @@
 package com.ik.gymrat.service;
 
+import com.ik.gymrat.api.dto.MuscleGroupResponse;
 import com.ik.gymrat.exceptions.MuscleGroupNotFoundException;
 import com.ik.gymrat.persistence.entity.MuscleGroup;
 import com.ik.gymrat.persistence.repository.MuscleGroupRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MuscleGroupService {
@@ -16,8 +19,12 @@ public class MuscleGroupService {
         this.muscleGroupRepository = muscleGroupRepository;
     }
 
-    public List<MuscleGroup> getAllMuscleGroups() {
-        return this.muscleGroupRepository.findAll();
+    public List<MuscleGroupResponse> getAllMuscleGroups() {
+        List<MuscleGroup> muscleGroups = this.muscleGroupRepository.findAll();
+        List<MuscleGroupResponse> muscleGroupResponses = muscleGroups.stream().map(muscleGroup -> {
+            return new MuscleGroupResponse(muscleGroup.getId(), muscleGroup.getName());
+        }).collect(Collectors.toList());
+        return muscleGroupResponses;
     }
 
     public MuscleGroup getMuscleGroupById(long id) {

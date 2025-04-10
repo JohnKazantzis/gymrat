@@ -1,5 +1,6 @@
 package com.ik.gymrat.api.controller;
 
+import com.ik.gymrat.api.dto.MuscleGroupResponse;
 import com.ik.gymrat.exceptions.MuscleGroupNotFoundException;
 import com.ik.gymrat.persistence.entity.MuscleGroup;
 import com.ik.gymrat.service.MuscleGroupService;
@@ -21,7 +22,7 @@ public class MuscleGroupController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MuscleGroup>> getAllMuscleGroups() {
+    public ResponseEntity<List<MuscleGroupResponse>> getAllMuscleGroups() {
         return ResponseEntity.ok(this.muscleGroupService.getAllMuscleGroups());
     }
 
